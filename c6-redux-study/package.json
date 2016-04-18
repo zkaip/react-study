@@ -4,6 +4,7 @@
   "description": "the most complete sample for redux.",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --progress --colors",
     "dev": "webpack-dev-server --devtool eval --progress --colors"
   },
   "repository": {
