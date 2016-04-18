@@ -1,8 +1,8 @@
-export default function todos(state = [], action) {
+export default function todos (state = [''], action) {
   switch (action.type) {
-  case 'ADD_TODO':
-    return state.concat([action.text])
-  default:
-    return state
+    case 'ADD_TODO':
+      return state.concat([action.text])
+    default:
+      return state
   }
 }

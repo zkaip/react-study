@@ -1,14 +1,15 @@
 import { createStore } from 'redux'
 import reducer from './reducer/index.js'
 
-let store = createStore(reducer)
-console.log('当前的 state :', store.getState())
+const store = createStore(reducer)
 
 store.dispatch({
   type: 'ADD_TODO',
   text: 'Use Redux'
 })
+
 store.dispatch({
-  type: 'INCREMENT',
+  type: 'DECREMENT'
 })
-console.log('改变后的 state :', store.getState())
+
+console.log('改变后的 state :',store.getState())
