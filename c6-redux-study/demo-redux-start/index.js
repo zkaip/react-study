@@ -4,30 +4,31 @@ import { createStore } from 'redux'
 const todos = (state = [''], action) => {
   switch (action.type) {
     case 'ADD_TODO':
-      return Object.assign([], state, [action.text]);
+      return Object.assign([],state,[action.text]);
     default:
       return state;
   }
 }
 
-let store = createStore(todos, [ 'Use Redux' ])
+let store = createStore(todos,['Use Redux'])
 
 // action creator
-function addTodo(text) {
+function addTodo (text) {
   return {
     type: 'ADD_TODO',
     text
   }
 }
 
-const handleChange =  () => {
-  console.log(store.getState());
+// handle change
+function handleChange () {
+  console.log(store.getState())
 }
 
-let unsubscribe = store.subscribe(handleChange)
+store.subscribe(handleChange)
 
 handleChange()
 
-// dispatch
+// dispatch(action)
 store.dispatch(addTodo('Read the docs'))
 store.dispatch(addTodo('Read about the middleware'))
