@@ -2,13 +2,15 @@ import React, { Component, PropTypes } from 'react'
 import Todo from './Todo'
 
 export default class TodoList extends Component {
-  render() {
+  render(){
+    console.log('todo:',this.props.todos)
+    
     return (
       <ul>
-        {this.props.todos.map((todo, index) =>
+        {this.props.todos.map((todo, index) => 
           <Todo {...todo}
                 key={index}
-                onClick={() => this.props.onTodoClick(index)} />
+                onClick={() => this.props.onTodoClick(index)}/>  
         )}
       </ul>
     )

@@ -5,12 +5,11 @@ import App from './containers/App'
 import { createStore } from 'redux';
 import todoApp from './reducers'
 
-let store = createStore(todoApp)
-let rootElement = document.getElementById('app')
+const store = createStore(todoApp)
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
-  rootElement
+  document.getElementById('app')
 )

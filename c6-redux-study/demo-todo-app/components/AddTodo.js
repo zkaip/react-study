@@ -1,18 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 
 export default class AddTodo extends Component {
-  render() {
+  render(){
     return (
       <div>
-        <input type='text' ref='input' />
-        <button onClick={(e) => this.handleClick(e)}>
+        <input type='text' ref='input'/>
+        <button onClick={(e)=>this.handleClick(e)}>
           Add
         </button>
       </div>
     )
   }
-
-  handleClick(e) {
+  handleClick(e){
     const node = this.refs.input
     const text = node.value.trim()
     this.props.onAddClick(text)
@@ -20,6 +19,6 @@ export default class AddTodo extends Component {
   }
 }
 
-AddTodo.propTypes = {
+AddTodo.propType = {
   onAddClick: PropTypes.func.isRequired
 }

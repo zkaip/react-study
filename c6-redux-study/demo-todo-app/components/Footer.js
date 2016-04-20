@@ -1,31 +1,33 @@
 import React, { Component, PropTypes } from 'react'
 
 export default class Footer extends Component {
-  renderFilter(filter, name) {
+  renderFilter(filter, name){
     if (filter === this.props.filter) {
+      console.log(name)
       return name
     }
-
+    
     return (
-      <a href='#' onClick={e => {
+      <a href='#' 
+      onClick={e=>{
         e.preventDefault()
+        console.log('FootFilter:',filter)
         this.props.onFilterChange(filter)
       }}>
         {name}
       </a>
     )
   }
-
-  render() {
+  render(){
     return (
       <p>
         Show:
         {' '}
-        {this.renderFilter('SHOW_ALL', 'All')}
+        {this.renderFilter('SHOW_ALL','All')}
         {', '}
-        {this.renderFilter('SHOW_COMPLETED', 'Completed')}
+        {this.renderFilter('SHOW_COMPLETED','Completed')}
         {', '}
-        {this.renderFilter('SHOW_ACTIVE', 'Active')}
+        {this.renderFilter('SHOW_ACTIVE','Active')}
         .
       </p>
     )
@@ -35,8 +37,6 @@ export default class Footer extends Component {
 Footer.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
   filter: PropTypes.oneOf([
-    'SHOW_ALL',
-    'SHOW_COMPLETED',
-    'SHOW_ACTIVE'
+    'SHOW_ALL','SHOW_COMPLETED','SHOW_ACTIVE'
   ]).isRequired
 }
