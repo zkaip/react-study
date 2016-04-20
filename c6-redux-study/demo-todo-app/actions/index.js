@@ -1,7 +1,7 @@
 // action 类型
 export const ADD_TODO = 'ADD_TODO'
 export const COMPLETE_TODO = 'COMPLETE_TODO'
-export const SET_VISIBILITY_FLITER = 'SET_VISIBILITY_FLITER'
+export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 
 // 其他常量
 export const VisibilityFilters = {
@@ -27,7 +27,7 @@ export function completeTodo (index) {
 export function setVisibilityFilter (filter) {
   console.log('filter:',filter)
   return {
-    type: SET_VISIBILITY_FLITER,
+    type: SET_VISIBILITY_FILTER,
     filter
   }
 }
