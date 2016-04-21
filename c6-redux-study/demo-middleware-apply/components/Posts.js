@@ -2,8 +2,8 @@ import React, { PropTypes, Component } from 'react'
 
 export default class Posts extends Component {
   render() {
-    let bio = this.props.posts;
-    
+    const bio = this.props.posts;
+
     return (
       <div>
         <h3> 用户信息 </h3>

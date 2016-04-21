@@ -27,7 +27,6 @@ function requestPosts(subreddit) {
 }
 
 function receivePosts(subreddit, json) {
-
   return {
     type: RECEIVE_POSTS,
     subreddit,
@@ -36,20 +35,19 @@ function receivePosts(subreddit, json) {
   }
 }
 
-function fetchPosts(subreddit) {
-
+function fetchPosts (subreddit) {
   return dispatch => {
     return fetch(`https://api.github.com/users/${subreddit}`)
       .then(response => response.json())
-      .then(json => {
-
-        dispatch(receivePosts(subreddit, json))
+      .then(json => {        
+        dispatch(receivePosts(subreddit,json))
       })
   }
 }
 
-function shouldFetchPosts(state, subreddit) {
+function shouldFetchPosts (state, subreddit) {
   const posts = state.postsBySubreddit[subreddit]
+  console.log(posts)
   if (!posts) {
     return true
   } else if (posts.isFetching) {
@@ -59,9 +57,12 @@ function shouldFetchPosts(state, subreddit) {
   }
 }
 
-export function fetchPostsIfNeeded(subreddit) {
+// redux-thunk
+export function fetchPostsIfNeeded (subreddit) {
   return (dispatch, getState) => {
-    if (shouldFetchPosts(getState(), subreddit)) {
+    if (shouldFetchPosts(getState(),subreddit)) {
+      console.log('subreddit:',subreddit)
+      
       return dispatch(fetchPosts(subreddit))
     }
   }

@@ -4,70 +4,68 @@ import { selectSubreddit, fetchPostsIfNeeded, invalidateSubreddit } from '../act
 import Picker from '../components/Picker'
 import Posts from '../components/Posts'
 
-class App extends Component {
-  constructor(props) {
+class App extends Component{
+
+  constructor(props){
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleRefreshClick = this.handleRefreshClick.bind(this)
   }
-
-  componentDidMount() {
-    const { dispatch, selectedSubreddit } = this.props
+  componentDidMount(){
+    const {dispatch, selectedSubreddit} = this.props
     dispatch(fetchPostsIfNeeded(selectedSubreddit))
   }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedSubreddit !== this.props.selectedSubreddit) {
-      const { dispatch, selectedSubreddit } = nextProps
+  
+  componentWillReceiveProps(nextProps){
+    console.log('nextProps:',nextProps)
+    
+    if (nextProps.selectedSubreddit !== this.props.selectedSubreddit){
+      const {dispatch, selectedSubreddit} = nextProps
       dispatch(fetchPostsIfNeeded(selectedSubreddit))
     }
   }
-
-  handleChange(nextSubreddit) {
+  handleChange(nextSubreddit){
     this.props.dispatch(selectSubreddit(nextSubreddit))
   }
-
-  handleRefreshClick(e) {
+  handleRefreshClick(e){
     e.preventDefault()
-
-    const { dispatch, selectedSubreddit } = this.props
+    const {dispatch, selectedSubreddit} = this.props
     dispatch(invalidateSubreddit(selectedSubreddit))
+    
     dispatch(fetchPostsIfNeeded(selectedSubreddit))
   }
-
-  render() {
-
-    const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props
-
+  render(){    
+    const {selectedSubreddit, posts, isFetching, lastUpdated} = this.props
+    console.log('posts:',posts)
+    
     return (
       <div>
         <Picker value={selectedSubreddit}
                 onChange={this.handleChange}
-                options={[ 'guoyongfeng', 'tj' ]} />
+                options={['guoyongfeng', 'tj']} />
         <p>
-          {lastUpdated &&
-            <span>
-              Last updated at {new Date(lastUpdated).toLocaleTimeString()}.
-              {' '}
-            </span>
-          }
-          {!isFetching &&
-            <a href='#'
-               onClick={this.handleRefreshClick}>
-              Refresh
-            </a>
-          }
+        {lastUpdated && 
+          <span>
+          Last updated at {new Date(lastUpdated).toLocaleTimeString()}
+          {' '}
+          </span>  
+        }
+        {!isFetching &&
+          <a href='#'
+             onClick={this.handleRefreshClick}>
+            Refresh
+          </a>
+        }
         </p>
         {isFetching && posts.length === 0 &&
-          <h2>请稍等...</h2>
+          <h2>请稍等...</h2>  
         }
         {!isFetching && posts.length === 0 &&
-          <h2>暂无数据.</h2>
+          <h2>暂无数据.</h2>  
         }
-        <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-          <Posts posts={posts} />
+        <div style={{opacity: isFetching ? 0.5: 1}}>
+          <Posts posts={posts}/>
         </div>
-
       </div>
     )
   }
@@ -81,8 +79,8 @@ App.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-function mapStateToProps(state) {
-  const { selectedSubreddit, postsBySubreddit } = state
+function mapStateToProps (state) {
+  const {selectedSubreddit, postsBySubreddit} = state
   const {
     isFetching,
     lastUpdated,
@@ -91,7 +89,7 @@ function mapStateToProps(state) {
     isFetching: true,
     items: {}
   }
-
+  
   return {
     selectedSubreddit,
     posts,

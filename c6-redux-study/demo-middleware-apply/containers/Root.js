@@ -5,8 +5,8 @@ import App from './App'
 
 const store = configureStore()
 
-export default class Root extends Component {
-  render() {
+export default class Root extends Component{
+  render(){
     return (
       <Provider store={store}>
         <App />

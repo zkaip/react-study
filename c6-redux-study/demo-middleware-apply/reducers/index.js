@@ -4,16 +4,16 @@ import {
   REQUEST_POSTS, RECEIVE_POSTS
 } from '../actions'
 
-function selectedSubreddit(state = 'guoyongfeng', action) {
+function selectedSubreddit (state = 'guoyongfeng', action) {
   switch (action.type) {
-  case SELECT_SUBREDDIT:
-    return action.subreddit
-  default:
-    return state
+    case SELECT_SUBREDDIT:
+      return action.subreddit  
+    default:
+      return state
   }
 }
 
-function posts(state = {
+function posts (state = {
   isFetching: false,
   didInvalidate: false,
   items: {}
@@ -25,34 +25,32 @@ function posts(state = {
       })
     case REQUEST_POSTS:
       return Object.assign({}, state, {
-        isFetching: true,
         didInvalidate: false
       })
     case RECEIVE_POSTS:
       return Object.assign({}, state, {
-        isFetching: false,
+        isFetching: true,
         didInvalidate: false,
         items: action.posts,
-        lastUpdated: action.receivedAt
+        lastUpdated: Date.now()
       })
     default:
       return state
   }
 }
 
-function postsBySubreddit(state = { }, action) {
+function postsBySubreddit (state = {}, action) {
   switch (action.type) {
     case INVALIDATE_SUBREDDIT:
     case RECEIVE_POSTS:
     case REQUEST_POSTS:
-      return Object.assign({}, state, {
-        [action.subreddit]: posts(state[action.subreddit], action)
+      return Object.assign({},state,{
+        [action.subreddit]:posts(state[action.subreddit],action)
       })
     default:
       return state
   }
 }
-
 const rootReducer = combineReducers({
   postsBySubreddit,
   selectedSubreddit
